@@ -25,7 +25,54 @@ public class BattleArena {
         //    - Проверить, жив ли игрок/враг, вывести статусы.
         // 5) По окончании цикла вывести победителя или причину завершения игры.
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your name: ");
-        String name = scanner.nextLine();
+        System.out.println("Enter your player name: ");
+        String playerName = scanner.nextLine();
+        Player player = new Player(playerName, 100, 10);
+
+        Enemy goblin = new Enemy("Small Goblin", 30, 5);
+
+        System.out.println(" A new " + goblin.getName() + " appears with " + goblin.getHealth() + "hp");
+
+        boolean finished = false;
+        while (player.isAlive() && goblin.isAlive() && !finished) {
+            System.out.println(" \n========== BATTLE MENU ===========");
+            System.out.println("1. Attack");
+            System.out.println("2. Heal");
+            System.out.println("3. Exit game");
+
+            System.out.println(" Choose an action: ");
+            int action = scanner.nextInt();
+
+            if (action ==1) {
+                player.attack(goblin);
+                if (goblin.isAlive()) {
+                    goblin.attack(player);
+                }
+            } else if (action ==2) {
+                player.heal(6);
+                if (goblin.isAlive()) {
+                    goblin.attack(player);
+                }
+            } else if (action ==3) {
+                finished = true;
+            }
+
+            if (player.isAlive() && goblin.isAlive() && !finished) {
+                System.out.println("\n --- Game State ---");
+                System.out.println(player.getName() + "-> HP : " + player.getHealth());
+                System.out.println(goblin.getName() + "-> HP : " + goblin.getHealth());
+            }
+        }
+
+        if (finished) {
+            System.out.println("Sad that you left the game :( Come back again!");
+        } else {
+            if(!player.isAlive()){
+                System.out.println("YOU DIED LOL. so baddd");
+            } else if (!goblin.isAlive()) {
+                System.out.println("YOU WIN. GG EZ :3");
+            }
+        }
+        scanner.close();
     }
 }
