@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Класс BattleArena (Основной класс с методом main)
  *
@@ -22,5 +24,8 @@ public class BattleArena {
         //    - Выполнить соответствующие методы (attack, takeDamage).
         //    - Проверить, жив ли игрок/враг, вывести статусы.
         // 5) По окончании цикла вывести победителя или причину завершения игры.
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
     }
 }
