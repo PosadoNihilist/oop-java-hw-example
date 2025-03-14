@@ -11,26 +11,48 @@
  * 4) Опционально: добавить геттеры/сеттеры, метод heal() или другие методы по необходимости.
  */
 public class Player {
-    // private String name;
-    // private int health;
-    // private int attackPower;
+    private String name;
+    private int health;
+    private int attackPower;
 
-    // public Player(String name, int health, int attackPower) {
-    //     // TODO: Инициализировать поля
-    // }
+    public Player(String name, int health, int attackPower) {
+         this.name = name;
+         this.health = health;
+         this.attackPower = attackPower;
+     }
 
-    // public void attack(Enemy enemy) {
-    //     // TODO: Логика нанесения урона enemy
-    // }
+     public void attack(Enemy enemy) {
+         System.out.println(name + " attacked " + enemy.getName() + " and did " + attackPower + " damage.");
+         enemy.takeDamage(attackPower);
+     }
 
-    // public void takeDamage(int damage) {
-    //     // TODO: Логика уменьшения здоровья
-    // }
+     public void takeDamage(int damage) {
+         health -= damage;
+         if(health < 0) {
+             health = 0;
+         }
+         System.out.println(name + " took" + damage + " damage. (HP: " + health + ")");
+     }
 
-    // public boolean isAlive() {
-    //     // TODO: Вернуть true, если здоровье игрока больше 0
-    //     // return false; // заглушка
-    // }
+     public boolean isAlive() {
+        return health > 0;
+     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
+    public void heal(int amount) {
+        health += amount;
+        System.out.println(name + " healed " + amount + " HP. (HP: " + health + ")");
+    }
 
     // Optional: добавить любые другие методы по желанию (например, heal(), getName(), getHealth() и т.д.)
 }
